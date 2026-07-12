@@ -1,0 +1,42 @@
+# Bazel
+bazel-*
+bazel-out
+bazel-testlogs
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+poetry.lock
+.coverage
+.coverage.*
+.pytest_cache/
+
+# Rust
+target/
+Cargo.lock
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
