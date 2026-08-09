@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+poetry.lock
+.env
+.env.local
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Rust
+/target/
+Cargo.lock
+
+# Node
+node_modules/
+dist/
+build/
+*.log
+
+# Docker
+*.pid
+docker-compose.override.yml
