@@ -7,17 +7,18 @@ __pycache__/
 env/
 venv/
 .venv/
-poetry.lock
+
+# Secrets (CRITICAL for public repos! Block keys and env files)
 .env
 .env.local
-.idea/
-.vscode/
-*.swp
-*.swo
+*.key
+*.pem
+*.priv
+*.crt
+infrastructure/certs/
 
-# Rust
+# Rust - Keep Cargo.lock for deterministic builds (do NOT ignore it)
 /target/
-Cargo.lock
 
 # Node
 node_modules/
@@ -25,6 +26,16 @@ dist/
 build/
 *.log
 
-# Docker
+# Docker & Configs - Remove the override ignore so it gets pushed
 *.pid
-docker-compose.override.yml
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Docker Local Volumes (keep these local)
+infrastructure/compose/*_data/
