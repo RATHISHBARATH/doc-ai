@@ -190,14 +190,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 </div>
 ```
-
----
-
-**What to do now:**
-1. Open your `README.md` in VS Code.
-2. Delete everything currently in it.
-3. Paste the entire block above.
-4. Save the file (`Ctrl+S`).
-5. Run `git add README.md && git commit -m "Update README to production grade" && git push`.
-
-Refresh your GitHub repository—your README will now look like a top-tier open‑source AI platform. 🚀
