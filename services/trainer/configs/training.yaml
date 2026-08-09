@@ -1,0 +1,66 @@
+# ============================================================
+# DOC AI Trainer – Training Configuration (Corrected)
+# ============================================================
+
+# Model configuration
+model_name: distilgpt2
+base_model_revision: main
+trust_remote_code: false
+use_fast_tokenizer: true
+
+# LoRA fine‑tuning parameters
+use_lora: true
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.1
+# Correct target modules for GPT‑2 / DistilGPT2
+target_modules:
+  - c_attn
+  - c_proj
+bias: none
+task_type: CAUSAL_LM
+
+# Training hyperparameters
+output_dir: /app/cache/model_output
+overwrite_output_dir: true
+num_epochs: 3
+per_device_train_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 2
+learning_rate: 5e-4
+lr_scheduler_type: cosine
+warmup_steps: 0
+weight_decay: 0.01
+adam_beta1: 0.9
+adam_beta2: 0.999
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+logging_steps: 5
+save_steps: 500
+eval_steps: 500
+save_total_limit: 2
+load_best_model_at_end: false
+metric_for_best_model: loss
+greater_is_better: false
+use_4bit: false
+bnb_4bit_compute_dtype: float16
+bnb_4bit_quant_type: nf4
+use_mixed_precision: fp16
+
+# Data configuration
+dataset_path: final/dataset.parquet
+tokenizer_path: tokenizer/v1000_1_*/tokenizer.json
+max_seq_length: 512
+dataset_split: train
+num_proc: 2
+shuffle_dataset: true
+
+# Scientist knowledge graph integration
+use_scientist_retrieval: false
+scientist_embedding_dim: 384
+top_k_scientists: 3
+
+# Logging & debugging
+log_level: INFO
+report_to: none
+run_name: doc_ai_lora_run_1

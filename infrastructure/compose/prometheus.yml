@@ -1,0 +1,51 @@
+# ============================================================
+# Prometheus Configuration
+# ============================================================
+
+global:
+  # How frequently to scrape targets by default.
+  scrape_interval: 15s
+
+  # How frequently to evaluate rules.
+  evaluation_interval: 15s
+
+# Alerting configuration (empty for now; we'll add later)
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Rule files (empty for now; we'll add alert rules later)
+rule_files:
+  # - "alerts.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Scrape Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Scrape the gateway service (Rust) – metrics on /metrics
+  - job_name: 'gateway'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['gateway:8080']
+
+  # Scrape the auth service (Rust) – metrics on /metrics (gRPC endpoints expose metrics on port 50051)
+  - job_name: 'auth'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['auth:50051']
+
+  # Scrape the inference service (Python) – metrics on /metrics
+  - job_name: 'inference'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['inference:8000']
+
+  # Scrape NATS monitoring endpoint
+  - job_name: 'nats'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['nats:8222']

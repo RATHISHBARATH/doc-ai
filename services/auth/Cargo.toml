@@ -1,0 +1,74 @@
+[package]
+name = "auth"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Web framework for OAuth2 HTTP endpoints – pinned to 0.6 to match gateway
+# and because the existing code uses the axum::Server::bind(...) API,
+# which was removed in axum 0.7 (replaced by axum::serve + TcpListener).
+axum = "0.6.20"
+
+# Async runtime
+tokio = { version = "1", features = ["full", "rt-multi-thread", "macros"] }
+
+# gRPC and Protobuf
+tonic = { version = "0.11", features = ["tls"] }
+prost = "0.12"
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres", "migrate", "chrono", "uuid"] }
+
+# Redis (for caching and rate limiting, optional)
+redis = { version = "0.23", features = ["tokio-comp"] }
+
+# OAuth2
+oauth2 = "4.4"
+
+# JWT
+jsonwebtoken = "9.3"
+
+# Password hashing
+bcrypt = "0.15"
+
+# UUID generation
+uuid = { version = "1.0", features = ["v4"] }
+
+# Date/time handling (used in jwt.rs)
+chrono = { version = "0.4", features = ["serde"] }
+
+# HTTP client (used in oauth.rs to call provider APIs)
+reqwest = { version = "0.11", features = ["json"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Configuration and error handling
+dotenv = "0.15"
+anyhow = "1"
+thiserror = "1"
+
+# Telemetry – tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+tracing-opentelemetry = "0.22"
+
+# OpenTelemetry
+opentelemetry = { version = "0.21", features = ["trace"] }
+opentelemetry_sdk = { version = "0.21", features = ["rt-tokio", "trace"] }
+opentelemetry-otlp = { version = "0.14", features = ["tonic"] }
+
+# Metrics (optional)
+metrics = "0.21"
+metrics-exporter-prometheus = "0.12"
+
+# Shared DOC AI common crate (contains auth.proto and inference.proto)
+doc-ai-common = { path = "../../shared/rust" }
+
+# Tower for middleware
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# Utilities
+futures = "0.3"

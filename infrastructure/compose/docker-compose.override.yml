@@ -1,0 +1,120 @@
+# ============================================================
+# Docker Compose Override for Local Development
+# ============================================================
+
+# This file overrides/adds configurations to the main docker-compose.yml.
+# It is not committed to version control (added to .gitignore).
+
+services:
+  # Add Loki logging driver to all services (optional)
+  # The loki driver must be installed first: 
+  # docker plugin install grafana/loki-docker-driver:latest --alias loki
+
+  postgres:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=postgres"
+
+  redis:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=redis"
+
+  nats:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=nats"
+
+  minio:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=minio"
+
+  prometheus:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=prometheus"
+
+  grafana:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=grafana"
+
+  loki:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=loki"
+
+  jaeger:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=jaeger"
+
+  gateway:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=gateway"
+
+  auth:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=auth"
+
+  inference:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "5"
+        loki-batch-size: "400"
+        loki-external-labels: "service=inference"
+
+  # ============================================================
+  # Data Pipeline service overrides
+  # ============================================================
+  data_pipeline:
+    # Run as root to avoid permission issues with internal directories.
+    user: root
+    # Allow the container to reach the host on Linux (host.docker.internal)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

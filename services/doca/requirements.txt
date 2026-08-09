@@ -1,0 +1,43 @@
+# ============================================================
+# DOC AI DOCA Service – Python Dependencies (Fixed)
+# ============================================================
+
+# Core libraries
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.1
+pyyaml==6.0.2
+
+# gRPC and protobuf – pinned to 1.60.0 for pymilvus compatibility
+grpcio==1.60.0
+grpcio-tools==1.60.0
+
+# Messaging (NATS)
+nats-py==2.8.0
+
+# Kafka client (for durable task queues)
+kafka-python==2.0.2
+
+# State storage
+redis==5.0.1
+psycopg2-binary==2.9.10
+
+# Vector DB client (Milvus) – for retrieval
+pymilvus==2.3.6
+
+# Graph DB client (Neo4j) – optional
+neobolt==1.7.2
+
+# Reasoning and inference
+transformers==4.39.0
+torch==2.3.0                      # installed from CPU index in Dockerfile
+
+# Observability
+structlog==25.1.0
+opentelemetry-api==1.23.0
+opentelemetry-sdk==1.23.0
+opentelemetry-exporter-otlp==1.23.0
+
+# Utilities
+tqdm==4.67.1
+python-dotenv==1.0.1
