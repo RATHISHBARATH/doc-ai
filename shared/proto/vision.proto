@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package doc_ai.vision;
+
+service Vision {
+  // Detect objects in an image
+  rpc DetectObjects(DetectRequest) returns (DetectResponse);
+
+  // Extract text from an image (OCR)
+  rpc OCR(OCRRequest) returns (OCRResponse);
+
+  // Recognize faces in an image
+  rpc RecognizeFaces(FaceRequest) returns (FaceResponse);
+
+  // Process a video file – frame‑by‑frame analysis and scene segmentation
+  rpc ProcessVideo(VideoRequest) returns (VideoResponse);
+
+  // Retrieve scenes by semantic query from the vector index
+  rpc QueryScenes(QueryRequest) returns (QueryResponse);
+}
+
+message DetectRequest { bytes image_data = 1; }
+message DetectResponse { repeated Object objects = 1; }
+
+message OCRRequest { bytes image_data = 1; }
+message OCRResponse { string text = 1; }
+
+message FaceRequest { bytes image_data = 1; }
+message FaceResponse { repeated Face faces = 1; }
+
+message VideoRequest {
+  string video_url = 1;
+  bool extract_frames = 2;
+  bool segment_scenes = 3;
+}
+message VideoResponse {
+  repeated Scene scenes = 1;
+  int64 frame_count = 2;
+}
+
+message QueryRequest { string query = 1; int32 top_k = 2; }
+message QueryResponse { repeated Scene scenes = 1; }
+
+message Object {
+  string label = 1;
+  float confidence = 2;
+  float x = 3;
+  float y = 4;
+  float width = 5;
+  float height = 6;
+}
+
+message Face {
+  float x = 1;
+  float y = 2;
+  float width = 3;
+  float height = 4;
+  string name = 5;
+  float confidence = 6;
+}
+
+message Scene {
+  int64 start_frame = 1;
+  int64 end_frame = 2;
+  string description = 3;
+  bytes embedding = 4;
+  string video_url = 5;
+  float confidence = 6;
+}

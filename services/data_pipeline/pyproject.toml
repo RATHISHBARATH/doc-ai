@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "data-pipeline"
+version = "0.1.0"
+description = "DOC AI Data Pipeline – Ingestion, Cleaning, Deduplication, Tokenizer Training, and Dataset Preparation"
+authors = ["Your Name <email@example.com>"]
+package-mode = false   # <-- Add this line to disable package installation
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-dotenv = "1.0.1"
+pyyaml = "6.0.2"
+click = "8.1.8"
+tqdm = "4.67.1"
+pandas = "2.2.3"
+pyarrow = "19.0.0"
+numpy = "2.2.4"
+fastparquet = "2024.11.0"
+ftfy = "6.2.3"
+regex = "2024.11.6"
+langdetect = "1.0.9"
+datasketch = "1.6.2"
+tokenizers = "0.21.1"
+datasets = "3.3.2"
+minio = "7.2.15"
+psycopg2-binary = "2.9.10"
+prefect = "2.20.5"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "8.3.4"
+pytest-cov = "6.0.0"
+mypy = "1.14.1"
+black = "24.10.0"
+ruff = "0.9.0"
+structlog = "25.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I"]

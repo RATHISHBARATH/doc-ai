@@ -1,0 +1,59 @@
+[package]
+name = "gateway"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Web framework – pin to 0.6.20
+axum = { version = "0.6.20", features = ["ws"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full", "rt-multi-thread", "macros"] }
+
+# gRPC and Protobuf
+tonic = "0.11"
+prost = "0.12"
+
+# Database clients
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres"] }
+redis = { version = "0.23", features = ["tokio-comp"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Configuration and error handling
+dotenv = "0.15"
+anyhow = "1"
+thiserror = "1"
+
+# Telemetry – tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+tracing-opentelemetry = "0.22"
+
+# OpenTelemetry
+opentelemetry = { version = "0.21", features = ["trace"] }
+opentelemetry_sdk = { version = "0.21", features = ["rt-tokio", "trace"] }
+opentelemetry-otlp = { version = "0.14", features = ["tonic"] }
+
+# Metrics
+metrics = "0.21"
+metrics-exporter-prometheus = "0.12"
+
+# Shared DOC AI common crate
+doc-ai-common = { path = "../../shared/rust" }
+
+# Hyper (use 0.14 for axum 0.6)
+hyper = { version = "0.14.32", features = ["server"] }
+
+# Static initialization for metrics encoder
+once_cell = "1.19"
+
+# Middleware and utilities
+tower = "0.4"
+tower-http = { version = "0.5.2", features = ["cors", "trace"] }
+futures = "0.3"
+
+# JWT validation (added for local token validation)
+jsonwebtoken = "8.0.0"

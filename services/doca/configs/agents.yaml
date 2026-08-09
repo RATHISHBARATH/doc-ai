@@ -1,0 +1,84 @@
+# ============================================================
+# DOCA Agent Registry Configuration
+# ============================================================
+
+# This file defines the agent types available in the DOCA ecosystem.
+# The Agent Factory uses this registry to instantiate agents on demand.
+
+agents:
+  - id: reasoning
+    type: reasoning
+    name: "Reasoning Agent"
+    description: "Executes Chain‑of‑Thought, Tree‑of‑Thought, and Reflection reasoning strategies."
+    capabilities:
+      - natural_language_reasoning
+      - multi_step_inference
+      - confidence_scoring
+    default: true
+    enabled: true
+
+  - id: reviewer
+    type: reviewer
+    name: "Reviewer Agent"
+    description: "Peer‑reviews answers for logical consistency, factual accuracy, and completeness."
+    capabilities:
+      - fact_checking
+      - logic_validation
+      - critique_generation
+    default: true
+    enabled: true
+
+  - id: planner
+    type: planner
+    name: "Planner Agent"
+    description: "Decomposes high‑level goals into sub‑tasks and builds workflow DAGs."
+    capabilities:
+      - task_decomposition
+      - workflow_generation
+      - dependency_analysis
+    default: true
+    enabled: true
+
+  - id: retriever
+    type: retriever
+    name: "Retriever Agent"
+    description: "Queries vector, graph, and long‑term memory systems to retrieve relevant context."
+    capabilities:
+      - vector_search
+      - graph_query
+      - context_aggregation
+    default: true
+    enabled: true
+
+  - id: synthesizer
+    type: synthesizer
+    name: "Synthesizer Agent"
+    description: "Combines multiple reasoning outputs into a coherent final response."
+    capabilities:
+      - answer_fusion
+      - conflict_resolution
+      - summarization
+    default: false
+    enabled: true
+
+  - id: code
+    type: code
+    name: "Code Agent"
+    description: "Generates, reviews, and validates code snippets for programming queries."
+    capabilities:
+      - code_generation
+      - code_review
+      - syntax_checking
+    default: false
+    enabled: true
+
+  - id: vision
+    type: vision
+    name: "Vision Agent"
+    description: "Processes images and visual data for multimodal reasoning (reserved for Phase 6)."
+    capabilities:
+      - image_analysis
+      - object_detection
+      - scene_understanding
+    default: false
+    enabled: false
